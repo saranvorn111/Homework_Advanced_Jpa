@@ -21,6 +21,7 @@ public class Account {
     private String accountName;
     private Boolean isDeleted;
     private Integer transferLimit;
+    private Integer balance;
    @ManyToOne
    @JoinColumn(name = "account")
     private AccountType accountType;
