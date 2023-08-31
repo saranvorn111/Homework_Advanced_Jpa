@@ -1,15 +1,14 @@
 package com.example.homewwork_jpa.init;
 
-import com.example.homewwork_jpa.entity.api.account.Account;
-import com.example.homewwork_jpa.entity.api.account.web.AccountRepository;
-import com.example.homewwork_jpa.entity.api.accountType.AccountType;
-import com.example.homewwork_jpa.entity.api.accountType.web.AccountTypeRepository;
+import com.example.homewwork_jpa.api.account.Account;
+import com.example.homewwork_jpa.api.account.web.AccountRepository;
+import com.example.homewwork_jpa.api.accountType.AccountType;
+import com.example.homewwork_jpa.api.accountType.web.AccountTypeRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
