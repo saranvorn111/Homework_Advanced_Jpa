@@ -30,8 +30,8 @@ public class AccountController {
     }
 
     @PutMapping("/{uuid}/rename")
-    public Account updateAccount(@PathVariable String uuid,@RequestBody UpdateAccountDto updateAccountDto){
-        return accountService.updateAccountByUuid(uuid,updateAccountDto);
+    public EntityModel<?> updateAccount(@PathVariable String uuid,@RequestBody UpdateAccountDto updateAccountDto){
+        return accountService.renameAccountByUuid(uuid,updateAccountDto);
 
     }
 

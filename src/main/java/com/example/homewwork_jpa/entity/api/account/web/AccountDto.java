@@ -1,6 +1,8 @@
 package com.example.homewwork_jpa.entity.api.account.web;
 
 import lombok.Builder;
+import lombok.Data;
+import lombok.Setter;
 import org.springframework.hateoas.server.core.Relation;
 
 @Builder

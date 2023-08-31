@@ -1,6 +1,7 @@
 package com.example.homewwork_jpa.entity.api.user;
 
 import com.example.homewwork_jpa.entity.api.user.web.CreateUserRoleDto;
+import com.example.homewwork_jpa.entity.api.user.web.UpdateUserDto;
 import com.example.homewwork_jpa.entity.api.user.web.UserDto;
 import org.mapstruct.Mapper;
 
@@ -12,6 +13,8 @@ public interface UserMapper {
     UserDto mapUserToUserDto(User user);
     List<UserDto> mapUserToUserDtoList(List<User> users);
     UserDto crateNewUser(CreateUserRoleDto createUserRoleDto);
+
+    UserDto updateUserDtoToUser (UpdateUserDto updateUserDto);
 
 
 

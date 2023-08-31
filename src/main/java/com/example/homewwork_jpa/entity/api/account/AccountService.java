@@ -15,7 +15,7 @@ public interface AccountService {
 
     EntityModel<?> findAccountByUuid(String uuid);
 
-    Account updateAccountByUuid(String uuid, UpdateAccountDto updateAccountDto);
+    EntityModel<?> renameAccountByUuid(String uuid, UpdateAccountDto updateAccountDto);
 
 
 

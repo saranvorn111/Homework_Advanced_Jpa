@@ -1,11 +1,10 @@
 package com.example.homewwork_jpa.entity.api.user;
 
 import com.example.homewwork_jpa.entity.api.rol.Role;
-import com.example.homewwork_jpa.entity.api.user.web.CreateUserRoleDto;
-import com.example.homewwork_jpa.entity.api.user.web.UpdateUserDto;
-import com.example.homewwork_jpa.entity.api.user.web.UserDto;
-import com.example.homewwork_jpa.entity.api.user.web.UserRepository;
+import com.example.homewwork_jpa.entity.api.user.web.*;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
@@ -62,16 +61,36 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserDto updatedUserExistedByUuid(String uuid, UpdateUserDto updateUserDto) {
+    public EntityModel<?> updatedUserExistedByUuid(String uuid, UpdateUserDto updateUserDto) {
         User updateUser = userRepository.findUserByUuid(uuid).orElseThrow(
                 ()->new ResponseStatusException(HttpStatus.NOT_FOUND,String.format(
                         "User with uuid: %d is not found",uuid
                 )));
+        updateUser.setName(updateUserDto.name());
+        updateUser.setGender(updateUserDto.gender());
+        updateUser.setEmail(updateUserDto.email());
+        updateUser.setPhoneNumber(updateUserDto.phoneNumber());
+
+        User user = userRepository.save(updateUser);
+        return userModelAssembler.toModel(user);
 
 
-        return null;
 
     }
 
+    @Override
+    public String disableUserByUuid(String uuid, IsDeleteUserDto isDeleteUserDto) {
+        User user = userRepository.findUserByUuid(uuid).orElseThrow();
+        user.setIsDeleted(isDeleteUserDto.isDeleted());
+
+        User userIsDeleted = userRepository.save(user);
+        return "Status is deleted"+userIsDeleted;
+    }
+
+    @Transactional
+    @Override
+    public void deleteUserByUuid(String uuid) {
+        userRepository.deleteUserByUuid(uuid);
+    }
 
 }

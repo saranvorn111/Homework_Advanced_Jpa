@@ -28,6 +28,19 @@ public class UserRestController {
         return userService.CreateNewUser(createUserRoleDto);
 
     }
+    @PutMapping("/{uuid}")
+    public EntityModel<?> updateUser(@PathVariable String uuid,@RequestBody UpdateUserDto updateUserDto){
+         return userService.updatedUserExistedByUuid(uuid,updateUserDto);
+    }
 
+    @PutMapping("/{uuid}/disable")
+    public String updateDisable(@PathVariable String uuid,@RequestBody IsDeleteUserDto isDeleteUserDto){
+        return userService.disableUserByUuid(uuid,isDeleteUserDto);
+    }
+
+    @DeleteMapping("/{uuid}")
+    public void deleteUserByUuid(@PathVariable String uuid){
+        userService.deleteUserByUuid(uuid);
+    }
 
 }

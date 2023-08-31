@@ -1,5 +1,6 @@
 package com.example.homewwork_jpa.entity.api.user;
 import com.example.homewwork_jpa.entity.api.user.web.CreateUserRoleDto;
+import com.example.homewwork_jpa.entity.api.user.web.IsDeleteUserDto;
 import com.example.homewwork_jpa.entity.api.user.web.UpdateUserDto;
 import com.example.homewwork_jpa.entity.api.user.web.UserDto;
 import org.springframework.hateoas.CollectionModel;
@@ -15,5 +16,11 @@ public interface UserService {
 
     void createUserRole(Integer id, List<Integer> roleId);
 
-    UserDto updatedUserExistedByUuid(String uuid, UpdateUserDto updateUserDto);
+    EntityModel<?> updatedUserExistedByUuid(String uuid, UpdateUserDto updateUserDto);
+
+    String disableUserByUuid(String uuid, IsDeleteUserDto isDeleteUserDto);
+
+    void deleteUserByUuid(String uuid);
+
+
 }

@@ -1,4 +1,10 @@
 package com.example.homewwork_jpa.entity.api.account.web;
 
-public record UpdateAccountDto(String accountName) {
+import lombok.Builder;
+
+@Builder
+public record UpdateAccountDto(
+        String uuid,
+        String accountName,
+        Integer transferLimit) {
 }

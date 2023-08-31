@@ -5,6 +5,7 @@ import com.example.homewwork_jpa.entity.api.account.web.AccountDto;
 import com.example.homewwork_jpa.entity.api.account.web.AccountRepository;
 import com.example.homewwork_jpa.entity.api.account.web.CreateAccountDto;
 import com.example.homewwork_jpa.entity.api.account.web.UpdateAccountDto;
+import com.example.homewwork_jpa.entity.api.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.hateoas.CollectionModel;
@@ -43,12 +44,14 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
-    public Account updateAccountByUuid(String uuid, UpdateAccountDto updateAccountDto) {
+    public EntityModel<?> renameAccountByUuid(String uuid, UpdateAccountDto updateAccountDto) {
         Account account = accountMapper.updateAccountDtoToAccount(updateAccountDto);
-        //for update Bean
-        BeanUtils.copyProperties(uuid,updateAccountDto);
+        account.setUuid(updateAccountDto.uuid());
+        account.setAccountName(updateAccountDto.accountName());
+        account.setTransferLimit(updateAccountDto.transferLimit());
 
-        return accountRepository.save(account);
+        Account accountRename = accountRepository.save(account);
+        return accountModelAssembler.toModel(accountRename);
     }
 
 
